@@ -4,5 +4,5 @@
 
 Access MongoDB through JDBC and MongoDB commands. Full documentation is maintained in `dbvisitor-doc`.
 
-- [中文文档](../../dbvisitor-doc/docs/drivers/mongo/about.md)
-- [English documentation](../../dbvisitor-doc/i18n/en/docusaurus-plugin-content-docs/current/drivers/mongo/about.md)
+- [中文文档](https://www.hasor.net/cn/dbvisitor/docs/drivers/mongo/about)
+- [English documentation](https://www.hasor.net/en/dbvisitor/docs/drivers/mongo/about)

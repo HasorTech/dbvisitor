@@ -4,17 +4,16 @@
 const {themes} = require('prism-react-renderer');
 const lightCodeTheme = themes.github;
 const darkCodeTheme = themes.dracula;
-const analyticsPlugin = require('./plugins/analytics.js');
+const {onlineOrigins} = require('./hasor-tech/routes');
 const projectVars = require('./plugins/projectVars.js');
 const remarkProjectVars = require('./plugins/remark-project-vars.js');
-const {GlobExcludeDefault} = require('@docusaurus/utils');
 
 /** @type {import('@docusaurus/types').Config} */
-const config = {
+const config = require('./hasor-tech/config')({
     title: 'dbVisitor - Java 数据库开发工具',
     tagline: 'dbVisitor Java 数据库开发工具',
-    url: 'https://www.dbvisitor.net',
-    baseUrl: '/',
+    url: process.env.DOCS_URL || onlineOrigins.dbvisitor,
+    baseUrl: process.env.DOCS_BASE_URL || '/',
     onBrokenLinks: 'throw',
     markdown: {
         preprocessor: ({fileContent}) => remarkProjectVars.replaceVariables(fileContent, projectVars),
@@ -24,7 +23,7 @@ const config = {
         }),
     },
     favicon: 'img/favicon/crab.ico',
-    organizationName: 'zycgit', // Usually your GitHub org/user name.
+    organizationName: 'HasorTech', // Usually your GitHub org/user name.
     projectName: 'dbVisitor',   // Usually your repo name.
     i18n: {
         defaultLocale: 'zh-cn',
@@ -36,6 +35,7 @@ const config = {
             /** @type {import('@docusaurus/preset-classic').Options} */
             {
                 docs: {
+                    path: 'docs/cn/docusaurus-plugin-content-docs/current',
                     remarkPlugins: [[remarkProjectVars, projectVars]],
                     sidebarPath: require.resolve('./sidebars.js'),
                     async sidebarItemsGenerator({defaultSidebarItemsGenerator, ...args}) {
@@ -45,23 +45,10 @@ const config = {
                             ? items.filter(item => !(item.type === 'doc' && item.id === 'features/overview'))
                             : items;
                     },
-                    editUrl: 'https://gitee.com/zycgit/dbvisitor/blob/main/dbvisitor-doc/',
+                    editLocalizedFiles: true,
+                    editUrl: 'https://gitee.com/hasortech/dbvisitor/blob/main/dbvisitor-doc/',
                 },
-                blog: {
-                    exclude: [...GlobExcludeDefault, '**/assets/**'],
-                    remarkPlugins: [[remarkProjectVars, projectVars]],
-                    showReadingTime: true,
-                    blogSidebarCount: 25,
-                    postsPerPage: 10,
-                    feedOptions: {
-                        type: ['rss', 'atom'],
-                        xslt: true,
-                    },
-                    editUrl: 'https://gitee.com/zycgit/dbvisitor/blob/main/dbvisitor-doc/',
-                    onInlineTags: 'warn',
-                    onInlineAuthors: 'warn',
-                    onUntruncatedBlogPosts: 'warn',
-                },
+                blog: false,
                 theme: {
                     customCss: require.resolve('./src/css/custom.css'),
                 },
@@ -82,58 +69,6 @@ const config = {
         colorMode: {
             disableSwitch: true,
         },
-        navbar: {
-            logo: {
-                alt: 'dbVisitor Logo',
-                src: 'img/favicon/crab.png',
-            },
-            items: [
-                {
-                    type: 'docSidebar',
-                    sidebarId: 'guides',
-                    position: 'left',
-                    label: '核心API',
-                },
-                {
-                    type: 'docSidebar',
-                    sidebarId: 'features',
-                    position: 'left',
-                    label: '数据源',
-                },
-                {
-                    type: 'docSidebar',
-                    sidebarId: 'drivers',
-                    position: 'left',
-                    label: 'JDBC 驱动',
-                },
-                {
-                    type: 'doc',
-                    docId: 'releases/latest',
-                    position: 'left',
-                    label: '版本记录',
-                },
-                {
-                    to: '/blog/archive',
-                    activeBasePath: '/blog',
-                    label: '博客',
-                    position: 'left'
-                },
-                {
-                    position: 'right',
-                    label: '码云',
-                    href: 'https://gitee.com/zycgit/dbvisitor'
-                },
-                {
-                    position: 'right',
-                    label: 'Github',
-                    href: 'https://github.com/zycgit/dbvisitor'
-                },
-                {
-                    type: 'localeDropdown',
-                    position: 'right',
-                }
-            ]
-        },
         prism: {
             theme: lightCodeTheme,
             darkTheme: darkCodeTheme,
@@ -141,16 +76,10 @@ const config = {
         },
         footer: {
             style: 'dark',
-            copyright: `Copyright © ${new Date().getFullYear()} dbVisitor. Built with Docusaurus.<br/>
-<a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=33011002016667">
-<img src="/img/beian.png" style="display: inline-block;">浙公网安备 33011002016667号
-</a>&nbsp;&nbsp;<a target="_blank" href="https://beian.miit.gov.cn/#/Integrated/index">浙ICP备18034797号-5</a>
-<div id="analyticsDiv" style="display: inline-block;"></div>`,
+            copyright: `Copyright © ${new Date().getFullYear()} dbVisitor. Built with Docusaurus.`,
         },
     },
     plugins: [
-        analyticsPlugin,
-        require.resolve('./plugins/blog-topics.js'),
         [
             require.resolve('./plugins/llms.js'),
             {
@@ -166,12 +95,11 @@ const config = {
                     enableMarkdownFiles: false,
                     enableLlmsFullTxt: false,
                     includeDocs: true,
-                    includeBlog: true,
+                    includeBlog: false,
                     includePages: false,
                     includeGeneratedIndex: false,
                     excludeRoutes: [
                         '**/tags{,/**}', '**/search', '**/404.html',
-                        '**/blog', '**/blog/{archive,authors,page,topics}{,/**}',
                     ],
                     contentSelectors: ['.theme-doc-markdown', 'article'],
                 },
@@ -187,11 +115,12 @@ const config = {
                 // ... Your options.
                 // `hashed` is recommended as long-term-cache of index file is possible.
                 hashed: true,
+                indexBlog: false,
                 // For Docs using Chinese, The `language` is recommended to set to:
                 language: ["en", "zh"],
             }),
         ],
     ]
-};
+}, 'dbvisitor');
 
 module.exports = config;

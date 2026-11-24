@@ -1,0 +1,302 @@
+---
+id: with_spring
+sidebar_position: 3
+hide_table_of_contents: true
+title: 3.3 Spring Integration
+description: Integration of dbVisitor ORM tool and Spring Boot.
+---
+import TagRed from '@site/src/components/tags/TagRed';
+import TagGray from '@site/src/components/tags/TagGray';
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import Vars from '@site/plugins/projectVars';
+
+export const Highlight = ({children, color}) => (
+<span style={{ backgroundColor: color, borderRadius: '2px', color: '#fff', padding: '0.2rem', }}>{children}</span>
+);
+
+# 3.3 Spring Integration
+
+## What is Spring
+
+Spring is a widely used Java application framework that provides an IoC container, transaction management, and Spring Boot auto-configuration.
+
+- Spring Project URL: https://spring.io/
+
+## Features
+
+- Extensive version support
+    - SpringBoot 2/3
+    - Spring 4.0.0 minimum
+- Multiple configuration methods
+    - application.properties configuration file
+    - Annotation-based
+    - Spring XML configuration
+
+## Configuration Method
+
+First, add the dependency, guide version: <Highlight color="rgb(227 17 108)">{Vars.docsVersion}</Highlight>
+
+<Tabs>
+  <TabItem value="a" label="SpringBoot Project" default>
+
+  ```xml
+  <dependency>
+      <groupId>net.hasor</groupId>
+      <artifactId>dbvisitor-spring-starter</artifactId>
+      <version>@project.docsVersion@</version>
+  </dependency>
+  ```
+
+  </TabItem>
+  <TabItem value="b" label="Non-SpringBoot Project">
+
+  ```xml
+  <dependency>
+      <groupId>net.hasor</groupId>
+      <artifactId>dbvisitor-spring</artifactId>
+      <version>@project.docsVersion@</version>
+  </dependency>
+  ```
+
+  </TabItem>
+</Tabs>
+
+```xml title='Using HikariCP as Database Connection Pool'
+<dependency>
+    <groupId>com.zaxxer</groupId>
+    <artifactId>HikariCP</artifactId>
+    <version>4.0.3</version>
+</dependency>
+```
+
+<Tabs>
+  <TabItem value="a" label="Based on application.properties" default>
+
+  ```properties
+  # Spring JDBC Datasource Configuration
+  spring.datasource.url=jdbc:mysql://127.0.0.1:3306/devtester
+  spring.datasource.username=root
+  spring.datasource.password=123456
+  # Required
+  dbvisitor.mapper-packages=com.example.demo.dao
+  dbvisitor.mapper-locations=classpath:dbvisitor/mapper/*.xml
+  ```
+
+  </TabItem>
+  <TabItem value="b" label="Based on Annotation">
+
+  ```java
+  @Configuration
+  @MapperScan(basePackages    = "com.example.demo.dao",
+              mapperLocations = "classpath:dbvisitor/mapper/*.xml")
+  public class DemoApplication {
+      ...
+  }
+  ```
+
+  </TabItem>
+  <TabItem value="c" label="Based on XML">
+
+  ```xml
+  <!-- Configuration -->
+  <bean id="configuration" class="net.hasor.dbvisitor.spring.support.ConfigurationBean">
+      <property name="mapperResources" value="classpath*:dbvisitor/mapper/*Mapper.xml"/>
+  </bean>
+  
+  <!-- Session -->
+  <bean id="session" class="net.hasor.dbvisitor.spring.support.SessionBean">
+      <property name="configuration" ref="configuration"/>
+      <property name="dataSource" ref="dataSource"/>
+  </bean>
+
+  <!-- userMapper -->
+  <bean id="userMapper" class="net.hasor.dbvisitor.spring.support.MapperBean">
+      <property name="session" ref="session"/>
+      <property name="mapperInterface" value="com.example.demo.dao.UserMapper"/>
+  </bean>
+  ```
+
+If adding XML configuration for each Mapper individually is too cumbersome, you can use `MapperScannerConfigurer` to scan and register them.
+
+  ```xml
+  <!-- Mapper Scanner -->
+  <bean class="net.hasor.dbvisitor.spring.mapper.MapperScannerConfigurer">
+      <property name="basePackage" value="com.example.demo.dao"/>
+      <property name="session" ref="session"/>
+  </bean>
+  ```
+
+  </TabItem>
+</Tabs>
+
+```java title='Inject Mapper'
+public class ServiceTest {
+    @Resource // Or @Autowired
+    private UserMapper userMapper;
+    ...
+}
+
+public interface UserMapper extends BaseMapper<UserDTO> {
+    ...
+}
+```
+
+## Using Transaction {#tran}
+
+<Tabs>
+  <TabItem value="a" label="Based on Annotation">
+
+  ```java
+  @Configuration
+  @EnableTransactionManagement
+  public class DsConfig {
+    @Bean
+    public PlatformTransactionManager txManager(DataSource dataSource) {
+        return new DataSourceTransactionManager(dataSource);
+    }
+  }
+  ```
+
+  </TabItem>
+  <TabItem value="b" label="Based on XML">
+
+  ```xml
+  <!-- Transaction Manager -->
+  <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+    <property name="dataSource" ref="dataSource"/>
+  </bean>
+
+  <!-- Enable Transaction Annotation -->
+  <tx:annotation-driven transaction-manager="transactionManager"/>
+  ```
+
+  </TabItem>
+</Tabs>
+
+```java title='Transaction control via @Transactional annotation'
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.annotation.Propagation;
+
+public class TxExample {
+    @Transactional(propagation = Propagation.REQUIRED)
+    public void exampleMethod() {
+        ...
+    }
+}
+```
+
+## Relevant Classes
+- net.hasor.dbvisitor.jdbc.JdbcOperations
+- net.hasor.dbvisitor.jdbc.JdbcTemplate
+- net.hasor.dbvisitor.lambda.LambdaOperations
+- net.hasor.dbvisitor.lambda.LambdaTemplate
+- net.hasor.dbvisitor.transaction.TransactionTemplate
+- net.hasor.dbvisitor.session.Configuration
+- net.hasor.dbvisitor.session.Session
+- net.hasor.dbvisitor.mapper.BaseMapper
+
+## Example Project {#example}
+
+:::info[Example]
+- [SpringBoot2 Example](https://gitee.com/hasortech/dbvisitor/tree/main/dbvisitor-example/springboot2/) and [SpringBoot3 Example](https://gitee.com/hasortech/dbvisitor/tree/main/dbvisitor-example/springboot3/) based on application.properties
+- [Example Project based on XML configuration](https://gitee.com/hasortech/dbvisitor/tree/main/dbvisitor-example/spring-xml1/)
+- [Example Project based on XML configuration using MapperScannerConfigurer](https://gitee.com/hasortech/dbvisitor/tree/main/dbvisitor-example/spring-xml2/)
+:::
+
+## Configuration Items
+
+### application.properties Configuration
+
+| Property Name | Description |
+|---|---|
+| dbvisitor.mapper-packages | <TagGray/> Package names to scan for Mapper interface definitions. Use `,` to separate multiple packages. |
+| dbvisitor.mapper-locations | <TagGray/> Path to scan for Mapper mapping files. Default is `classpath*:/dbvisitor/mapper/**/*.xml`. Multiple paths can be separated by `,` `;` `\t` `\n`. |
+| dbvisitor.mapper-disabled | <TagGray/> Use `true/false` to disable Mapper interfaces scanned by `dbvisitor.mapper-packages`. <br/>Default is `false`. Consider setting to `true` if conflicts occur when sharing the same mapper file with other frameworks. |
+| dbvisitor.mapper-name-generator | <TagGray/> Class name of the generator for simplifying mapper bean names. Needs to implement `BeanNameGenerator` interface. Default: empty. |
+| dbvisitor.marker-annotation | <TagGray/> Set a scan path so that only Mapper interfaces annotated with a specific annotation are recognized as Mapper interface classes. Default: `net.hasor.dbvisitor.mapper.MapperDef`. |
+| dbvisitor.marker-interface | <TagGray/> Set a scan path so that only Mapper interfaces implementing a specific interface are recognized as Mapper interface classes. Default: `net.hasor.dbvisitor.mapper.Mapper`. |
+| dbvisitor.mapper-factory-bean | <TagGray/> Factory class for creating Mappers. Default: `net.hasor.dbvisitor.spring.support.MapperBean`. |
+| dbvisitor.ref-session | <TagGray/> Used to customize the name of the Session Bean used by the Mapper Bean. |
+| dbvisitor.mapper-lazy-init | <TagGray/> `lazyInit` attribute of Mapper Bean. Default: `false`. |
+| dbvisitor.mapper-scope | <TagGray/> Spring scope of Mapper Bean. Default determined by `AbstractBeanDefinition.SCOPE_DEFAULT`. <br/>If set, `singleton` is recommended. |
+| dbvisitor.auto-mapping | <TagGray/> Whether to automatically map all fields under the type to columns in the database. `true` means automatic. `false` means must be declared via `@Column` annotation. |
+| dbvisitor.camel-case | <TagGray/> Convert table names and property names to underscored table and column names based on camel case rules. |
+| dbvisitor.use-delimited | <TagGray/> Force adding identifier delimiters when generating table names/column names/index names. For example: set this property to solve the problem of column names being keywords. Default is `false` (not set). |
+| dbvisitor.case-insensitive | <TagGray/> Whether table/column names are case-sensitive. Default `true` (insensitive). |
+| dbvisitor.ignore-nonexist-statement | <TagGray/> Whether to ignore missing mappings during the mapping of Mapper interface methods to XML. Default is `false`. Missing mappings will report an error. |
+| dbvisitor.dialect | <TagGray/> **[Database Dialect](../../features/differences/builder)** used by default. |
+
+### @MapperScan Annotation Attributes
+
+| Property Name | Description |
+|---|---|
+| value, basePackages, basePackageClasses | Refer to dbvisitor.mapper-packages config |
+| mapperLocations | Refer to dbvisitor.mapper-locations config |
+| nameGenerator | Refer to dbvisitor.mapper-name-generator config |
+| annotationClass | Refer to dbvisitor.marker-annotation config |
+| markerInterface | Refer to dbvisitor.marker-interface config |
+| sessionRef | Refer to dbvisitor.ref-session config |
+| factoryBean | Refer to dbvisitor.mapper-factory-bean config |
+| lazyInit | Refer to dbvisitor.mapper-lazy-init config |
+| defaultScope | Refer to dbvisitor.mapper-scope config |
+| mapperDisabled | Refer to dbvisitor.mapper-disabled config |
+
+:::tip
+Annotation configuration has higher priority than configuration file (application.properties is recommended for simpler configuration).
+:::
+
+### ConfigurationBean Attributes
+
+| Property Name | Description |
+|---|---|
+| mapperResources | Refer to dbvisitor.mapper-locations config |
+| mapperInterfaces | Refer to dbvisitor.marker-interface config. ConfigurationBean will load resource references declared on Mapper. |
+| typeRegistry | Used to customize [Type Handler](../types/about) registry. |
+| javaTypeHandlerMap | Used to register custom [TypeHandler](../types/about) as a handler for a Java type. |
+| jdbcTypeHandlerMap | Used to register custom [TypeHandler](../types/about) as a handler for a JDBC type. |
+| ruleRegistry | Used to customize [Rule](../rules/about) registry. |
+| ruleHandlerMap | Used to register custom [Rule](../rules/about). |
+| autoMapping | Refer to dbvisitor.auto-mapping config |
+| camelCase | Refer to dbvisitor.camel-case config |
+| caseInsensitive | Refer to dbvisitor.case-insensitive config |
+| useDelimited | Refer to dbvisitor.use-delimited config |
+| dialectName | Refer to dbvisitor.dialect config |
+| ignoreNonExistStatement | Refer to dbvisitor.ignore-nonexist-statement config |
+
+### SessionBean Attributes
+
+| Property Name | Description |
+|---|---|
+| configuration | Configuration used by the Session created by SessionBean. |
+| dataSource | DataSource used. |
+| dsAdapter | AbstractDsAdapter type object. This class determines how to get Connection from dataSource. |
+| dsAdapterClass | dsAdapter type name (Class type). Equivalent to dsAdapterName attribute. |
+| dsAdapterName | dsAdapter type name (String type). Equivalent to dsAdapterClass attribute. |
+
+### MapperBean Attributes
+
+| Property Name | Description |
+|---|---|
+| session | Session used by MapperBean to create Mapper object. |
+| mapperInterface | Specific Mapper created by MapperBean. |
+
+### MapperScannerConfigurer Attributes
+
+| Property Name | Description |
+|---|---|
+| basePackage | Refer to dbvisitor.mapper-packages config |
+| nameGeneratorName | Refer to dbvisitor.mapper-name-generator config (Type Name) |
+| nameGenerator | Refer to dbvisitor.mapper-name-generator config (Object) |
+| annotationClassName | Refer to dbvisitor.marker-annotation config (Type Name) |
+| annotationClass | Refer to dbvisitor.marker-annotation config (Type) |
+| markerInterfaceName | Refer to dbvisitor.marker-interface config (Type Name) |
+| markerInterface | Refer to dbvisitor.marker-interface config (Type) |
+| session | Refer to dbvisitor.ref-session config (Object) |
+| sessionRef | Refer to dbvisitor.ref-session config (Bean Name) |
+| mapperFactoryBeanClassName | Refer to dbvisitor.mapper-factory-bean config (Type Name) |
+| mapperFactoryBeanClass | Refer to dbvisitor.mapper-factory-bean config (Type) |
+| mapperDisabled | Refer to dbvisitor.mapper-disabled config |
+| lazyInit | Refer to dbvisitor.mapper-lazy-init config |
+| defaultScope | Refer to dbvisitor.mapper-scope config |
+| dependsOn | Pre-requisite Beans that the Mapper depends on during creation. |

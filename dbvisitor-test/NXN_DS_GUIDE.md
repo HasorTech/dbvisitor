@@ -1,6 +1,6 @@
 # N×N 测试与文档维护指南
 
-N×N 验证 dbVisitor 的同一项 API 能力在不同数据源上的实际行为。分类以核心 API 为骨架，测试代码通过注解直接关联[数据源差异](../dbvisitor-doc/docs/features/overview.md)使用的[兼容性 JSON](../dbvisitor-doc/src/data/capabilities)。不再另行维护 Markdown 能力矩阵。
+N×N 验证 dbVisitor 的同一项 API 能力在不同数据源上的实际行为。分类以核心 API 为骨架，测试代码通过注解直接关联[数据源差异](https://www.hasor.net/cn/dbvisitor/docs/features/overview)使用的[兼容性 JSON](../dbvisitor-doc/src/data/capabilities)。不再另行维护 Markdown 能力矩阵。
 
 ## 1. 分类与归属
 

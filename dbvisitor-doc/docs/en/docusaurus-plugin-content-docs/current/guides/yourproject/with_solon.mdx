@@ -1,0 +1,134 @@
+---
+id: with_solon
+sidebar_position: 4
+hide_table_of_contents: true
+title: 3.4 Solon Integration
+description: Integration of dbVisitor ORM tool and Solon.
+---
+import TagRed from '@site/src/components/tags/TagRed';
+import TagGray from '@site/src/components/tags/TagGray';
+import Vars from '@site/plugins/projectVars';
+
+export const Highlight = ({children, color}) => (
+  <span style={{ backgroundColor: color, borderRadius: '2px', color: '#fff', padding: '0.2rem', }}>{children}</span>
+);
+
+# 3.4 Solon Integration
+
+## What is Solon
+
+Solon is a lightweight Java application framework that provides dependency injection, configuration, web, transaction, and plugin extension capabilities.
+
+- Solon Project URL: https://solon.noear.org/
+
+## Features
+
+- Auto-configure Datasource
+- Mapper Interface Injection
+- Multi-datasource Support
+- Support Transaction Control
+
+## Configuration Method
+
+First, add the dependency, guide version: <Highlight color="rgb(227 17 108)">{Vars.docsVersion}</Highlight>
+
+```xml title='Maven Dependency'
+<dependency>
+    <groupId>net.hasor</groupId>
+    <artifactId>dbvisitor-solon-plugin</artifactId>
+    <version>@project.docsVersion@</version>
+</dependency>
+```
+
+```xml title='Using HikariCP as Database Connection Pool'
+<dependency>
+    <groupId>com.zaxxer</groupId>
+    <artifactId>HikariCP</artifactId>
+    <version>4.0.3</version>
+</dependency>
+```
+
+```yaml title='Configuration File'
+solon.dataSources:
+  default!:  # Datasource name (with ! at the end identifying default datasource)
+    class: "com.zaxxer.hikari.HikariDataSource"
+    jdbcUrl: "jdbc:mysql://127.0.0.1:13306/devtester?allowMultiQueries=true&user=root&password=123456"
+dbvisitor:
+  default:   # Corresponding datasource name
+    mapperLocations: classpath:dbvisitor/mapper/*.xml
+    mapperPackages: net.hasor.dbvisitor.test.dao.*
+```
+
+```java title='Inject Mapper'
+@Controller
+public class HelloController {
+  @Inject
+  private UserMapper userMapper;
+
+  @Get
+  @Mapping("/hello")
+  public String hello(String name) {
+    return ...
+  }
+}
+
+public interface UserMapper extends BaseMapper<UserDTO> {
+    ...
+}
+```
+
+:::info[Example]
+[Example Project](https://gitee.com/hasortech/dbvisitor/tree/main/dbvisitor-example/solon/)
+:::
+
+## Injectable Types {#inject}
+
+- JdbcOperations interface, [JdbcTemplate](../core/jdbc/about) is its implementation
+- LambdaOperations interface, [LambdaTemplate](../core/lambda/about) is its implementation
+- Configuration class
+- Session class
+- Custom Mapper
+
+**Relevant Classes**
+- net.hasor.dbvisitor.jdbc.JdbcOperations
+- net.hasor.dbvisitor.jdbc.JdbcTemplate
+- net.hasor.dbvisitor.lambda.LambdaOperations
+- net.hasor.dbvisitor.lambda.LambdaTemplate
+- net.hasor.dbvisitor.transaction.TransactionTemplate
+- net.hasor.dbvisitor.session.Configuration
+- net.hasor.dbvisitor.session.Session
+- net.hasor.dbvisitor.mapper.BaseMapper
+
+:::info[Injection Hint]
+- The above injected types support @Db, @Inject annotations
+- @Db can specify the data source name under multi-data source via @Db("name")
+:::
+
+## Using Transaction {#tran}
+
+```java title='Transaction control via @Tran annotation'
+import org.noear.solon.data.annotation.Tran;
+
+public class TxExample {
+    @Tran(policy = TranPolicy.required)
+    public void exampleMethod() throws SQLException {
+      ...
+    }
+}
+```
+
+## Configuration Items
+
+| Property Name | Description |
+|---|---|
+| mapperLocations | <TagGray/> Path to scan for Mapper mapping files. Default is `dbvisitor/mapper/*.xml`. |
+| mapperPackages | <TagGray/> Package names to scan for Mapper interface definitions. Use `,` to separate multiple packages. |
+| mapperDisabled | <TagGray/> Use `true/false` to disable Mapper interfaces scanned by `dbvisitor.mapper-packages`. <br/>Default is `false`. Consider setting to `true` if conflicts occur when sharing the same mapper file with other frameworks. |
+| markerAnnotation | <TagGray/> Set a scan path so that only Mapper interfaces annotated with a specific annotation are recognized as Mapper interface classes. Default: `net.hasor.dbvisitor.mapper.MapperDef`. |
+| markerInterface | <TagGray/> Set a scan path so that only Mapper interfaces implementing a specific interface are recognized as Mapper interface classes. Default: `net.hasor.dbvisitor.mapper.Mapper`. |
+| autoMapping | <TagGray/> Whether to automatically map all fields under the type to columns in the database. `true` means automatic. `false` means must be declared via `@Column` annotation. |
+| camelCase | <TagGray/> Convert table names and property names to underscored table and column names based on camel case rules. |
+| useDelimited | <TagGray/> Force adding identifier delimiters when generating table names/column names/index names. For example: set this property to solve the problem of column names being keywords. Default is `false` (not set). |
+| caseInsensitive | <TagGray/> Whether table/column names are case-sensitive. Default `true` (insensitive). |
+| ignoreNonExistStatement | <TagGray/> Whether to ignore missing mappings during the mapping of Mapper interface methods to XML. Default is `false`. Missing mappings will report an error. |
+| dialect | <TagGray/> **[Database Dialect](../../features/differences/builder)** used by default. |

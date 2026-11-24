@@ -1,5 +1,5 @@
 {
-  "url": "https://www.dbvisitor.net/",
+  "url": "https://www.hasor.net/dbvisitor/",
   "licenses": [
     {
       "name": "The Apache Software License, Version 2.0",
@@ -13,9 +13,9 @@
     }
   ],
   "scm": {
-    "connection": "scm:git:git@gitee.com:zycgit/dbvisitor.git",
-    "developerConnection": "scm:git:git@gitee.com:zycgit/dbvisitor.git",
-    "url": "https://gitee.com/zycgit/dbvisitor",
+    "connection": "scm:git:git@gitee.com:hasortech/dbvisitor.git",
+    "developerConnection": "scm:git:git@gitee.com:hasortech/dbvisitor.git",
+    "url": "https://gitee.com/hasortech/dbvisitor",
     "tag": "HEAD"
   }
 }

@@ -4,5 +4,5 @@
 
 Access Redis through JDBC and Redis commands, using the `jedis` URL prefix. Full documentation is maintained in `dbvisitor-doc`.
 
-- [中文文档](../../dbvisitor-doc/docs/drivers/redis/about.md)
-- [English documentation](../../dbvisitor-doc/i18n/en/docusaurus-plugin-content-docs/current/drivers/redis/about.md)
+- [中文文档](https://www.hasor.net/cn/dbvisitor/docs/drivers/redis/about)
+- [English documentation](https://www.hasor.net/en/dbvisitor/docs/drivers/redis/about)

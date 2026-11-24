@@ -116,7 +116,7 @@ docker compose --profile milvus-tls ps milvus milvus_tls_gateway milvus_tls milv
 - 透传网关不解密流量、不挂载证书或私钥；服务端证书与客户端身份仍由客户端和 Milvus 端到端校验。对外每个实例仅一个端口：TLS `2954`，mTLS `2955`，均只绑定 `127.0.0.1`。JDBC URL 填该端口即可，无额外 REST 参数。两个 TLS 后端的 8080、19530 和管理端口 9091 均不映射到宿主机；Compose 健康检查在容器内执行。
 - 服务端仅挂载 CA 证书、服务端证书和私钥，不挂载 CA 私钥或客户端身份。PEM 客户端私钥使用 `client.key`，不是 DER 格式的 `client.pk8`。
 - 证书包含 localhost 和 127.0.0.1。经容器服务名或 SSH 转发连接时配置 `serverName=localhost`，保持服务端身份校验。
-- Cloud 无需增加本地模拟容器；使用真实集群端点、token 和网络权限验证。JDBC 参数及 Cloud 示例见 [dbvisitor-doc 连接参数与 TLS](../../dbvisitor-doc/docs/drivers/milvus/params.md#tls)。
+- Cloud 无需增加本地模拟容器；使用真实集群端点、token 和网络权限验证。JDBC 参数及 Cloud 示例见 [dbvisitor-doc 连接参数与 TLS](https://www.hasor.net/cn/dbvisitor/docs/drivers/milvus/params#tls)。
 
 等待测试服务健康、网关启动后，在 dbvisitor 根目录执行：
 

@@ -1,32 +1,19 @@
+import Community from '@site/hasor-tech/Community';
 import React, {useState} from 'react';
 import clsx from 'clsx';
 import Layout from '@theme/Layout';
 import Link from '@docusaurus/Link';
 import Translate, {translate} from '@docusaurus/Translate';
-import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import useBaseUrl from '@docusaurus/useBaseUrl';
+import DatabaseCodeIcon from '@site/static/img/api-styles/database-code.svg';
+import AnnotationTagIcon from '@site/static/img/api-styles/tag.svg';
+import TableOperationsIcon from '@site/static/img/api-styles/table-options.svg';
+import FilterIcon from '@site/static/img/api-styles/filter.svg';
+import CodeFileIcon from '@site/static/img/api-styles/file-code.svg';
+import LicenseBadge from '@site/static/img/labels/license.svg';
 import styles from './index.module.css';
-import Vars from '@site/plugins/projectVars';
 
 /* ==================== Static Data ==================== */
-
-const LabelList = [
-    {
-        alt: 'License',
-        Svg: require('../../static/img/labels/license.svg').default,
-        href: 'https://www.apache.org/licenses/LICENSE-2.0.html'
-    },
-    {
-        alt: 'Email',
-        Svg: require('../../static/img/labels/email-zyc@byshell.svg').default,
-        href: 'mailto:zyc@hasor.net'
-    },
-    {
-        alt: 'QQ Group',
-        Svg: require('../../static/img/labels/qqgroup-948706820.svg').default,
-        href: 'https://qm.qq.com/cgi-bin/qm/qr?k=-ha3lrkHrAddrZMINYbmxj4W7ZrrWW2b&jump_from=webapi&authKey=BtyfWIjWF7uhOf/ZPur+pr5p1efOZyjGESLynkPzbJ9IMd/j/T/pR1SDLcJKC972'
-    },
-];
 
 const DatabaseGroups = [
     {
@@ -80,42 +67,34 @@ const DatabaseGroups = [
 /* ==================== Hero Section ==================== */
 
 function HeroSection() {
+    const crab = useBaseUrl('/img/projects/dbvisitor.svg');
     return (
         <header className={styles.heroBanner}>
-            <div className="container">
-                <h1 className={styles.heroTitle}>dbVisitor</h1>
-                <p className={styles.heroSlogan}>One APIs Access Any DataBase</p>
-                <p className={styles.heroDesc}>
-                    <Translate id="dbv.hero.desc">
-                        承认差异、管理差异、而非消灭差异 —— 通过双层适配架构，通过统一 API 访问已支持的数据库。
-                    </Translate>
-                </p>
-                <div className={styles.heroBadges}>
-                    {LabelList.filter(item => item.alt === 'License').map((item, idx) => (
-                        <a key={idx} target="_blank" rel="noopener noreferrer" href={item.href}>
-                            <item.Svg alt={item.alt}/>
-                        </a>
-                    ))}
+            <div className={clsx('container', styles.container, styles.heroLayout)}>
+                <div>
+                    <h1 className={styles.heroTitle}>dbVisitor</h1>
+                    <p className={styles.heroSlogan}>One APIs Access Any DataBase</p>
+                    <p className={styles.heroDesc}>
+                        <Translate id="dbv.hero.desc">
+                            承认差异、管理差异、而非消灭差异 —— 通过双层适配架构，通过统一 API 访问已支持的数据库。
+                        </Translate>
+                    </p>
+                    <div className={styles.heroButtons}>
+                        <Link className={clsx('button button--lg', styles.btnPrimary)}
+                              to="/docs/guides/yourproject/with_java">
+                            <Translate id="dbv.hero.getStarted">快速开始</Translate>
+                        </Link>
+                        <Link className={clsx('button button--lg', styles.btnSecondary)}
+                              to="/docs/guides/overview">
+                            <Translate id="dbv.hero.overview">认识 dbVisitor</Translate>
+                        </Link>
+                        <Link className={clsx('button button--lg', styles.btnSecondary)}
+                              to="/docs/guides/search">
+                            <Translate id="dbv.hero.docIndex">文档目录</Translate>
+                        </Link>
+                    </div>
                 </div>
-                <div className={styles.heroButtons}>
-                    <Link className={clsx('button button--lg', styles.btnPrimary)}
-                          to="/blog/archive">
-                        <Translate id="dbv.hero.readBlog">阅读博客</Translate>
-                    </Link>
-                    <Link className={clsx('button button--lg', styles.btnSecondary)}
-                          to="/docs/guides/overview">
-                        <Translate id="dbv.hero.getStarted">快速开始</Translate>
-                    </Link>
-                    <Link className={clsx('button button--lg', styles.btnSecondary)}
-                          to="https://github.com/zycgit/dbvisitor">
-                        GitHub
-                    </Link>
-                </div>
-                <p className={styles.heroReadingHint}>
-                    <Translate id="dbv.hero.readingHint">
-                        从实战文章开始：向量检索、多数据源开发与对象映射。
-                    </Translate>
-                </p>
+                <img className={styles.heroCrab} src={crab} alt="" width="216" height="216"/>
             </div>
         </header>
     );
@@ -145,19 +124,20 @@ function DatabaseItem({db}) {
 function DatabaseSection() {
     return (
         <section className={styles.dbSection}>
-            <div className="container">
-                <h2 className={styles.sectionTitle}>
-                    <Translate id="dbv.db.title">广泛的数据库支持</Translate>
-                </h2>
-                <p className={styles.sectionSubtitle}>
-                    <Translate id="dbv.db.subtitle">
-                        覆盖多种关系型数据库方言，并通过 JDBC 驱动适配器支持 NoSQL 和向量数据库
-                    </Translate>
-                </p>
+            <div className={clsx('container', styles.container, styles.dbLayout)}>
+                <div>
+                    <h2 className={styles.sectionTitle}>
+                        <Translate id="dbv.db.title">广泛的数据库支持</Translate>
+                    </h2>
+                    <p className={styles.sectionSubtitle}>
+                        <Translate id="dbv.db.subtitle">
+                            覆盖多种关系型数据库方言，并通过 JDBC 驱动适配器支持 NoSQL 和向量数据库
+                        </Translate>
+                    </p>
+                </div>
                 <div className={styles.dbGrid}>
-                    {DatabaseGroups.map((group, index) => (
+                    {DatabaseGroups.map(group => (
                         <React.Fragment key={group.id}>
-                            {index > 0 && <div className={styles.dbDivider} aria-hidden="true"/>}
                             {group.databases.map(db => (
                                 <DatabaseItem key={db.name} db={db}/>
                             ))}
@@ -172,28 +152,32 @@ function DatabaseSection() {
 /* ==================== Architecture Section ==================== */
 
 function ArchitectureSection() {
+    const diagramUrl = useBaseUrl('/img/double.png');
+
     return (
-        <section className={styles.archSection}>
-            <div className="container">
-                <h2 className={styles.sectionTitle}>
+        <section className={styles.archSection} aria-labelledby="dbv-architecture-title">
+            <div className={clsx('container', styles.container)}>
+                <h2 id="dbv-architecture-title" className={styles.sectionTitle}>
                     <Translate id="dbv.arch.title">双层适配架构</Translate>
                 </h2>
-                <p className={styles.sectionSubtitle}>
-                    <Translate id="dbv.arch.subtitle">
-                        应用层管理查询方式差异，协议层管理通信协议差异
-                    </Translate>
-                </p>
-                <p className={styles.archPrinciple}>
-                    <Translate id="dbv.phil.subtitle">使用不同层面的 API 来解决不同层面的问题，尊重数据源差异，管理数据源差异。</Translate>
-                </p>
-                <div className={styles.archDiagram}>
+                <figure className={styles.archDiagram}>
                     <img
-                        src="/img/double.png"
+                        src={diagramUrl}
                         alt="Dual-Layer Adapter Architecture"
                         className={styles.archImage}
                         loading="lazy"
                     />
-                </div>
+                    <figcaption className={styles.archCaption}>
+                        <div>
+                            <strong><Translate id="dbv.arch.application.title">应用层</Translate></strong>
+                            <span><Translate id="dbv.arch.application.desc">适配不同的查询方式。</Translate></span>
+                        </div>
+                        <div>
+                            <strong><Translate id="dbv.arch.protocol.title">协议层</Translate></strong>
+                            <span><Translate id="dbv.arch.protocol.desc">适配不同数据库的通信协议。</Translate></span>
+                        </div>
+                    </figcaption>
+                </figure>
             </div>
         </section>
     );
@@ -217,11 +201,10 @@ function ApiStylesSection() {
 
     const apiStyles = [
         {
-            icon: '⌨️',
+            Icon: DatabaseCodeIcon,
             name: 'JdbcTemplate',
             desc: translate({id: 'dbv.api.jdbc.desc', message: '原生 SQL 操作，最直接的数据库访问方式'}),
             docLink: '/docs/guides/api/jdbc',
-            codeTitle: 'JdbcTemplate.java',
             code: (s) => (<>
                 <span className={s.codeType}>{'JdbcTemplate'}</span>{' jdbc = '}<span className={s.codeKeyword}>{'new'}</span>{' '}<span className={s.codeType}>{'JdbcTemplate'}</span>{'(dataSource);\n\n'}
                 <span className={s.codeComment}>{translate({id: 'dbv.api.jdbc.c1', message: '// 查询映射到 Bean'}) + '\n'}</span>
@@ -236,11 +219,10 @@ function ApiStylesSection() {
             </>),
         },
         {
-            icon: '📝',
+            Icon: AnnotationTagIcon,
             name: translate({id: 'dbv.api.annotation.name', message: '声明式接口'}),
             desc: translate({id: 'dbv.api.annotation.desc', message: '声明式接口 + 注解，类似 MyBatis Mapper'}),
             docLink: '/docs/guides/api/mapper',
-            codeTitle: 'UserMapper.java',
             code: (s) => (<>
                 <span className={s.codeKeyword}>{'@SimpleMapper'}</span>{'\n'}
                 <span className={s.codeKeyword}>{'public interface'}</span>{' '}<span className={s.codeType}>{'UserMapper'}</span>{' {\n'}
@@ -253,11 +235,10 @@ function ApiStylesSection() {
             </>),
         },
         {
-            icon: '🧱',
+            Icon: TableOperationsIcon,
             name: translate({id: 'dbv.api.base.name', message: '通用 Mapper'}),
             desc: translate({id: 'dbv.api.base.desc', message: '通用 CRUD 操作，零 SQL 快速开发'}),
             docLink: '/docs/guides/core/mapper/about',
-            codeTitle: 'BaseMapper.java',
             code: (s) => (<>
                 <span className={s.codeType}>{'BaseMapper'}</span>{'<'}<span className={s.codeType}>{'User'}</span>{'>'}{' mapper = session.'}<span className={s.codeMethod}>{'createBaseMapper'}</span>{'('}<span className={s.codeType}>{'User'}</span>{'.class);\n\n'}
                 <span className={s.codeComment}>{translate({id: 'dbv.api.base.c1', message: '// 主键查询'}) + '\n'}</span>
@@ -270,27 +251,24 @@ function ApiStylesSection() {
             </>),
         },
         {
-            icon: '🔮',
+            Icon: FilterIcon,
             name: translate({id: 'dbv.api.lambda.name', message: '条件构造器'}),
             desc: translate({id: 'dbv.api.lambda.desc', message: 'Lambda 表达式构建查询，类型安全'}),
             docLink: '/docs/guides/api/lambda',
-            codeTitle: 'LambdaTemplate.java',
             code: (s) => (<>
                 <span className={s.codeType}>{'LambdaTemplate'}</span>{' lambda = '}<span className={s.codeKeyword}>{'new'}</span>{' '}<span className={s.codeType}>{'LambdaTemplate'}</span>{'(dataSource);\n\n'}
                 <span className={s.codeComment}>{translate({id: 'dbv.api.lambda.c1', message: '// 类型安全的 Lambda 查询'}) + '\n'}</span>
-                <span className={s.codeType}>{'List'}</span>{'<'}<span className={s.codeType}>{'User'}</span>{'>'}{' users = lambda\n'}
-                {'    .'}<span className={s.codeMethod}>{'query'}</span>{'('}<span className={s.codeType}>{'User'}</span>{'.class)\n'}
-                {'    .'}<span className={s.codeMethod}>{'eq'}</span>{'('}<span className={s.codeType}>{'User'}</span>{'::'}<span className={s.codeMethod}>{'getName'}</span>{', '}<span className={s.codeString}>{'"Alice"'}</span>{')\n'}
-                {'    .'}<span className={s.codeMethod}>{'ge'}</span>{'('}<span className={s.codeType}>{'User'}</span>{'::'}<span className={s.codeMethod}>{'getAge'}</span>{', '}<span className={s.codeString}>{'20'}</span>{')\n'}
-                {'    .'}<span className={s.codeMethod}>{'queryForList'}</span>{'();\n'}
+                <span className={s.codeType}>{'List'}</span>{'<'}<span className={s.codeType}>{'User'}</span>{'>'}{' users = lambda.'}<span className={s.codeMethod}>{'query'}</span>{'('}<span className={s.codeType}>{'User'}</span>{'.class)\n'}
+                {'                         .'}<span className={s.codeMethod}>{'eq'}</span>{'('}<span className={s.codeType}>{'User'}</span>{'::'}<span className={s.codeMethod}>{'getName'}</span>{', '}<span className={s.codeString}>{'"Alice"'}</span>{')\n'}
+                {'                         .'}<span className={s.codeMethod}>{'ge'}</span>{'('}<span className={s.codeType}>{'User'}</span>{'::'}<span className={s.codeMethod}>{'getAge'}</span>{', '}<span className={s.codeString}>{'20'}</span>{')\n'}
+                {'                         .'}<span className={s.codeMethod}>{'queryForList'}</span>{'();\n'}
             </>),
         },
         {
-            icon: '📄',
+            Icon: CodeFileIcon,
             name: 'XML Mapper',
             desc: translate({id: 'dbv.api.xml.desc', message: 'XML 定义 SQL 映射，兼容 MyBatis 风格'}),
             docLink: '/docs/guides/api/file_mapper',
-            codeTitle: 'userMapper.xml + UserMapper.java',
             code: (s) => (<>
                 <span className={s.codeComment}>{translate({id: 'dbv.api.xml.c1', message: '// XML 定义（userMapper.xml）'}) + '\n'}</span>
                 <span className={s.codeKeyword}>{'<select'}</span>{' '}<span className={s.codeType}>{'id'}</span>{'='}<span className={s.codeString}>{'"selectById"'}</span>{' '}<span className={s.codeType}>{'resultType'}</span>{'='}<span className={s.codeString}>{'"com.example.User"'}</span><span className={s.codeKeyword}>{'>'}</span>{'\n'}
@@ -308,11 +286,11 @@ function ApiStylesSection() {
 
     return (
         <section className={styles.apiSection}>
-            <div className="container">
-                <h2 className={styles.sectionTitle} style={{textAlign: 'center'}}>
+            <div className={clsx('container', styles.container)}>
+                <h2 className={styles.sectionTitle}>
                     <Translate id="dbv.api.title">5 种 API 风格</Translate>
                 </h2>
-                <p className={styles.sectionSubtitle} style={{textAlign: 'center'}}>
+                <p className={styles.sectionSubtitle}>
                     <Translate id="dbv.api.subtitle">
                         选择最适合场景的 API，所有风格共享同一套底层运行机制。
                     </Translate>
@@ -322,14 +300,14 @@ function ApiStylesSection() {
                 <div className={styles.apiTabs}>
                     {apiStyles.map((api, idx) => (
                         <button
-                            key={idx}
+                            key={api.docLink}
                             className={clsx(styles.apiTab, idx === activeIdx && styles.apiTabActive)}
                             type="button"
                             aria-pressed={idx === activeIdx}
                             aria-controls="api-example"
                             onClick={() => { setActiveIdx(idx); }}
                         >
-                            <span className={styles.apiTabIcon}>{api.icon}</span>
+                            <api.Icon className={styles.apiTabIcon} aria-hidden="true" focusable="false"/>
                             <span className={styles.apiTabName}>{api.name}</span>
                         </button>
                     ))}
@@ -338,17 +316,24 @@ function ApiStylesSection() {
                 {/* Content: description + code */}
                 <div id="api-example" className={styles.apiShowcase}>
                     <div className={styles.apiInfo}>
-                        <div className={styles.apiInfoIcon}>{current.icon}</div>
-                        <h3 className={styles.apiInfoTitle}>{current.name}</h3>
+                        <div className={styles.apiInfoHeading}>
+                            <div className={styles.apiInfoIcon}>
+                                <current.Icon aria-hidden="true" focusable="false"/>
+                            </div>
+                            <h3 className={styles.apiInfoTitle}>{current.name}</h3>
+                        </div>
                         <p className={styles.apiInfoDesc}>{current.desc}</p>
                         <Link className="button button--primary button--sm" to={current.docLink}>
                             <Translate id="dbv.api.viewDoc">查看文档</Translate> →
                         </Link>
                     </div>
                     <div className={styles.apiCode}>
-                        <CodeBlock title={current.codeTitle}>
-                            {current.code(styles)}
-                        </CodeBlock>
+                        {apiStyles.map((api, idx) => (
+                            <pre key={api.docLink} className={clsx(styles.codeBlock, styles.codeContent)}
+                                 aria-hidden={idx !== activeIdx}>
+                                <code>{api.code(styles)}</code>
+                            </pre>
+                        ))}
                     </div>
                 </div>
             </div>
@@ -361,11 +346,11 @@ function ApiStylesSection() {
 function CodeExampleSection() {
     return (
         <section className={styles.codeSection}>
-            <div className="container">
-                <h2 className={styles.sectionTitle} style={{textAlign: 'center'}}>
+            <div className={clsx('container', styles.container)}>
+                <h2 className={styles.sectionTitle}>
                     <Translate id="dbv.code.title">同一套 API，不同的数据库</Translate>
                 </h2>
-                <p className={styles.sectionSubtitle} style={{textAlign: 'center'}}>
+                <p className={styles.sectionSubtitle}>
                     <Translate id="dbv.code.subtitle">
                         在驱动支持的范围内复用 API，SQL、字段映射和事务能力仍取决于数据源
                     </Translate>
@@ -376,10 +361,9 @@ function CodeExampleSection() {
                         <span className={styles.codeType}>{'Configuration'}</span>{' config = '}<span className={styles.codeKeyword}>{'new'}</span>{' '}<span className={styles.codeType}>{'Configuration'}</span>{'();\n'}
                         <span className={styles.codeType}>{'LambdaTemplate'}</span>{' t = config.'}<span className={styles.codeMethod}>{'newLambda'}</span>{'(ds);\n\n'}
                         <span className={styles.codeComment}>{translate({id: 'dbv.code.comment.lambda', message: '// Lambda 查询'}) + '\n'}</span>
-                        <span className={styles.codeType}>{'List'}</span>{'<'}<span className={styles.codeType}>{'User'}</span>{'>'}{' users = t\n'}
-                        {'    .'}<span className={styles.codeMethod}>{'query'}</span>{'('}<span className={styles.codeType}>{'User'}</span>{'.class)\n'}
-                        {'    .'}<span className={styles.codeMethod}>{'eq'}</span>{'('}<span className={styles.codeType}>{'User'}</span>{'::'}<span className={styles.codeMethod}>{'getAge'}</span>{', '}<span className={styles.codeString}>{'18'}</span>{')\n'}
-                        {'    .'}<span className={styles.codeMethod}>{'queryForList'}</span>{'();\n'}
+                        <span className={styles.codeType}>{'List'}</span>{'<'}<span className={styles.codeType}>{'User'}</span>{'>'}{' users = t.'}<span className={styles.codeMethod}>{'query'}</span>{'('}<span className={styles.codeType}>{'User'}</span>{'.class)\n'}
+                        {'                    .'}<span className={styles.codeMethod}>{'eq'}</span>{'('}<span className={styles.codeType}>{'User'}</span>{'::'}<span className={styles.codeMethod}>{'getAge'}</span>{', '}<span className={styles.codeString}>{'18'}</span>{')\n'}
+                        {'                    .'}<span className={styles.codeMethod}>{'queryForList'}</span>{'();\n'}
                     </CodeBlock>
 
                     <CodeBlock title="MongoDB / Elasticsearch">
@@ -387,52 +371,10 @@ function CodeExampleSection() {
                         <span className={styles.codeType}>{'Configuration'}</span>{' config = '}<span className={styles.codeKeyword}>{'new'}</span>{' '}<span className={styles.codeType}>{'Configuration'}</span>{'();\n'}
                         <span className={styles.codeType}>{'LambdaTemplate'}</span>{' t = config.'}<span className={styles.codeMethod}>{'newLambda'}</span>{'(ds);\n\n'}
                         <span className={styles.codeComment}>{translate({id: 'dbv.code.comment.same', message: '// 完全相同的 Lambda 查询'}) + '\n'}</span>
-                        <span className={styles.codeType}>{'List'}</span>{'<'}<span className={styles.codeType}>{'User'}</span>{'>'}{' users = t\n'}
-                        {'    .'}<span className={styles.codeMethod}>{'query'}</span>{'('}<span className={styles.codeType}>{'User'}</span>{'.class)\n'}
-                        {'    .'}<span className={styles.codeMethod}>{'eq'}</span>{'('}<span className={styles.codeType}>{'User'}</span>{'::'}<span className={styles.codeMethod}>{'getAge'}</span>{', '}<span className={styles.codeString}>{'18'}</span>{')\n'}
-                        {'    .'}<span className={styles.codeMethod}>{'queryForList'}</span>{'();\n'}
+                        <span className={styles.codeType}>{'List'}</span>{'<'}<span className={styles.codeType}>{'User'}</span>{'>'}{' users = t.'}<span className={styles.codeMethod}>{'query'}</span>{'('}<span className={styles.codeType}>{'User'}</span>{'.class)\n'}
+                        {'                    .'}<span className={styles.codeMethod}>{'eq'}</span>{'('}<span className={styles.codeType}>{'User'}</span>{'::'}<span className={styles.codeMethod}>{'getAge'}</span>{', '}<span className={styles.codeString}>{'18'}</span>{')\n'}
+                        {'                    .'}<span className={styles.codeMethod}>{'queryForList'}</span>{'();\n'}
                     </CodeBlock>
-                </div>
-            </div>
-        </section>
-    );
-}
-
-/* ==================== Quick Start Section ==================== */
-
-function QuickStartSection() {
-    return (
-        <section className={styles.quickStartSection}>
-            <div className="container">
-                <h2 className={styles.sectionTitle} style={{textAlign: 'center'}}>
-                    <Translate id="dbv.start.title">快速开始</Translate>
-                </h2>
-                <p className={styles.sectionSubtitle} style={{textAlign: 'center'}}>
-                    <Translate id="dbv.start.subtitle">
-                        引入核心库与目标 JDBC 驱动，以下使用最新正式版
-                    </Translate>
-                </p>
-                <div className={styles.quickStartContainer}>
-                    <div className={styles.mavenBlock}>
-                        <div className={styles.codeHeader}>
-                            <span className={styles.codeTitle}>pom.xml</span>
-                        </div>
-                        <pre className={styles.codeContent}>
-                            {'<'}<span className={styles.codeKeyword}>{'dependency'}</span>{'>\n'}
-                            {'  <'}<span className={styles.codeKeyword}>{'groupId'}</span>{'>'}<span className={styles.codeString}>{'net.hasor'}</span>{'</'}<span className={styles.codeKeyword}>{'groupId'}</span>{'>\n'}
-                            {'  <'}<span className={styles.codeKeyword}>{'artifactId'}</span>{'>'}<span className={styles.codeString}>{'dbvisitor'}</span>{'</'}<span className={styles.codeKeyword}>{'artifactId'}</span>{'>\n'}
-                            {'  <'}<span className={styles.codeKeyword}>{'version'}</span>{'>'}<span className={styles.codeString}>{Vars.lastReleaseVer}</span>{'</'}<span className={styles.codeKeyword}>{'version'}</span>{'>\n'}
-                            {'</'}<span className={styles.codeKeyword}>{'dependency'}</span>{'>\n'}
-                        </pre>
-                    </div>
-                    <div className={styles.quickStartButtons}>
-                        <Link className="button button--primary button--lg" to="/docs/guides/overview">
-                            <Translate id="commons.document">使用手册</Translate>
-                        </Link>
-                        <Link className="button button--outline button--primary button--lg" to="/docs/guides/search">
-                            <Translate id="commons.search">快速检索</Translate>
-                        </Link>
-                    </div>
                 </div>
             </div>
         </section>
@@ -442,51 +384,23 @@ function QuickStartSection() {
 /* ==================== Bottom CTA Section ==================== */
 
 function CtaSection() {
-    const {i18n} = useDocusaurusContext();
-    const channels = {
-        github: {label: 'GitHub Issues', href: 'https://github.com/zycgit/dbvisitor/issues'},
-        gitee: {label: 'Gitee Issues', href: 'https://gitee.com/zycgit/dbvisitor/issues'},
-        discussions: {
-            label: translate({id: 'dbv.cta.discussions', message: '使用讨论'}),
-            href: 'https://github.com/zycgit/dbvisitor/discussions',
-        },
-        qq: {
-            label: translate({id: 'dbv.cta.qq', message: 'QQ 交流群'}),
-            href: LabelList.find(item => item.alt === 'QQ Group').href,
-        },
-        email: {
-            label: translate({id: 'dbv.cta.email', message: '联系作者'}),
-            href: LabelList.find(item => item.alt === 'Email').href,
-        },
-    };
-    const order = i18n.currentLocale.startsWith('zh')
-        ? ['gitee', 'qq', 'github', 'discussions', 'email']
-        : ['github', 'discussions', 'gitee', 'qq', 'email'];
-
     return (
-        <section className={styles.ctaSection}>
-            <div className="container">
-                <h2 className={styles.ctaTitle}>
-                    <Translate id="dbv.cta.title">加入社区</Translate>
-                </h2>
-                <p className={styles.ctaDesc}>
-                    <Translate id="dbv.cta.desc">
-                        交流使用经验、反馈问题，参与 dbVisitor 的改进。
-                    </Translate>
-                </p>
-                <div className={styles.ctaLinks}>
-                    {order.map(key => {
-                        const channel = channels[key];
-                        return (
-                            <a key={key} className={styles.communityLink}
-                               target={key === 'email' ? undefined : '_blank'}
-                               rel={key === 'email' ? undefined : 'noopener noreferrer'}
-                               href={channel.href}>
-                                {channel.label}
-                            </a>
-                        );
-                    })}
-                </div>
+        <section className={styles.ctaSection} aria-labelledby="dbv-community-title">
+            <div className={clsx('container', styles.container)}>
+                <Community>
+                    <div className={styles.ctaHeading}>
+                        <h2 id="dbv-community-title" className={styles.ctaTitle}>
+                            <Translate id="dbv.cta.title">加入社区</Translate>
+                        </h2>
+                        <a className={styles.licenseBadge} href="https://www.apache.org/licenses/LICENSE-2.0.html"
+                           target="_blank" rel="noopener noreferrer" aria-label="Apache License 2.0">
+                            <LicenseBadge aria-hidden="true" focusable="false"/>
+                        </a>
+                    </div>
+                    <p className={styles.ctaDesc}>
+                        <Translate id="dbv.cta.desc">交流使用经验、反馈问题，参与 dbVisitor 的改进。</Translate>
+                    </p>
+                </Community>
             </div>
         </section>
     );
@@ -503,7 +417,6 @@ export default function Home() {
                 <ApiStylesSection/>
                 <CodeExampleSection/>
                 <ArchitectureSection/>
-                <QuickStartSection/>
             </main>
             <CtaSection/>
         </Layout>

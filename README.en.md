@@ -7,10 +7,10 @@
 </p>
 
 <p align="center">
-	<a href="https://www.dbvisitor.net/en"><b>Website</b></a> •
-	<a href="https://www.dbvisitor.net/en/docs/guides/overview"><b>Documentation</b></a> •
-    <a href="https://www.dbvisitor.net/en/blog"><b>Blog</b></a> •
-    <a href="https://www.dbvisitor.net/en/llms.txt"><b>AI Documentation Index</b></a>
+	<a href="https://www.hasor.net/dbvisitor/"><b>Website</b></a> •
+	<a href="https://www.hasor.net/en/dbvisitor/docs/guides/overview"><b>Documentation</b></a> •
+    <a href="https://www.hasor.net/en/blog/dbvisitor/"><b>Blog</b></a> •
+    <a href="https://www.hasor.net/en/dbvisitor/llms.txt"><b>AI Documentation Index</b></a>
 </p>
 
 <p align="center">
@@ -20,11 +20,11 @@
     <a target="_blank" href="LICENSE.txt">
 		<img src="https://img.shields.io/:License-Apache2-blue.svg" alt="Apache 2" />
 	</a>
-    <a target="_blank" href='https://gitee.com/zycgit/dbvisitor/stargazers'>
-		<img src='https://gitee.com/zycgit/dbvisitor/badge/star.svg' alt='gitee star'/>
+    <a target="_blank" href='https://gitee.com/hasortech/dbvisitor/stargazers'>
+		<img src='https://gitee.com/hasortech/dbvisitor/badge/star.svg' alt='gitee star'/>
 	</a>
-    <a target="_blank" href='https://github.com/zycgit/dbvisitor/stargazers'>
-		<img src="https://img.shields.io/github/stars/zycgit/dbvisitor.svg?style=flat&logo=github" alt="github star"/>
+    <a target="_blank" href='https://github.com/HasorTech/dbvisitor/stargazers'>
+		<img src="https://img.shields.io/github/stars/HasorTech/dbvisitor.svg?style=flat&logo=github" alt="github star"/>
 	</a>
     <br />
     <a href="https://qm.qq.com/cgi-bin/qm/qr?k=-ha3lrkHrAddrZMINYbmxj4W7ZrrWW2b&jump_from=webapi&authKey=BtyfWIjWF7uhOf/ZPur+pr5p1efOZyjGESLynkPzbJ9IMd/j/T/pR1SDLcJKC972">
@@ -70,49 +70,49 @@ dbVisitor provides multi-level API abstraction, allowing for free switching betw
 ### 🔋 Capabilities
 
 - **API Layered Abstraction**:
-  - [Programmatic API](https://www.dbvisitor.net/docs/guides/api/program_api): Access database programmatically, characterized by powerful flexibility.
-  - [Declarative API](https://www.dbvisitor.net/docs/guides/api/declarative_api): Centralize SQL maintenance through interfaces, making the code structure clearer.
-  - [Generic Mapper](https://www.dbvisitor.net/docs/guides/api/base_mapper): Generic Mapper makes your program more refined at the data access layer.
-  - [Builder API](https://www.dbvisitor.net/docs/guides/api/lambda_api): Construct query conditions via chain calls, avoiding the tediousness of handwritten SQL.
-  - [File Mapper](https://www.dbvisitor.net/docs/guides/api/file_mapper): Write SQL or DSL via files, completely separating SQL logic from code.
-  - [JDBC Adapter](https://www.dbvisitor.net/docs/guides/drivers/about): Provides standard encapsulation of JDBC, supporting access to various non-relational databases.
+  - [Programmatic API](https://www.hasor.net/en/dbvisitor/docs/guides/api/jdbc): Access database programmatically, characterized by powerful flexibility.
+  - [Declarative API](https://www.hasor.net/en/dbvisitor/docs/guides/core/mapper/annotation_query): Centralize SQL maintenance through interfaces, making the code structure clearer.
+  - [Generic Mapper](https://www.hasor.net/en/dbvisitor/docs/guides/api/mapper): Generic Mapper makes your program more refined at the data access layer.
+  - [Builder API](https://www.hasor.net/en/dbvisitor/docs/guides/api/lambda): Construct query conditions via chain calls, avoiding the tediousness of handwritten SQL.
+  - [File Mapper](https://www.hasor.net/en/dbvisitor/docs/guides/api/file_mapper): Write SQL or DSL via files, completely separating SQL logic from code.
+  - [JDBC Adapter](https://www.hasor.net/en/dbvisitor/docs/drivers/about): Provides standard encapsulation of JDBC, supporting access to various non-relational databases.
 - **Object Mapping**:
-    - [One API](https://www.dbvisitor.net/docs/guides/core/mapping/about) handles different types of data sources with a smooth learning curve and no need to master complex concepts.
-    - Supports intelligent result set mapping, automatically handling [Camel Case Conversion](https://www.dbvisitor.net/docs/guides/core/mapping/camel_case) and property filling.
-    - Built-in 6 types of [Key Generators](https://www.dbvisitor.net/docs/guides/core/mapping/keytype); custom ones are also supported.
+    - [One API](https://www.hasor.net/en/dbvisitor/docs/guides/core/mapping/about) handles different types of data sources with a smooth learning curve and no need to master complex concepts.
+    - Supports intelligent result set mapping, automatically handling [Camel Case Conversion](https://www.hasor.net/en/dbvisitor/docs/guides/core/mapping/camel_case) and property filling.
+    - Built-in 6 types of [Key Generators](https://www.hasor.net/en/dbvisitor/docs/guides/core/mapping/key_generator); custom ones are also supported.
     - Tips: Relationship mapping is not supported (e.g., One-to-One, One-to-Many, Many-to-One, Many-to-Many).
 - **SQL Rules**:
-    - [Dynamic SQL Simplification](https://www.dbvisitor.net/docs/guides/rules/about): Introduces `@{...}` rule syntax significantly simplifying dynamic SQL concatenation logic, saying goodbye to cumbersome XML tags.
-    - [SQL Enhancement Rules](https://www.dbvisitor.net/docs/guides/rules/dynamic_rule): Built-in rules like `@{and}`, `@{or}`, `@{in}`, automatically determining whether conditions take effect based on parameter null values.
-    - [Argument Processing Rules](https://www.dbvisitor.net/docs/guides/rules/args_rule): Supports directives like `@{md5}`, `@{uuid}`, preprocessing arguments before SQL execution.
+    - [Dynamic SQL Simplification](https://www.hasor.net/en/dbvisitor/docs/guides/rules/about): Introduces `@{...}` rule syntax significantly simplifying dynamic SQL concatenation logic, saying goodbye to cumbersome XML tags.
+    - [SQL Enhancement Rules](https://www.hasor.net/en/dbvisitor/docs/guides/rules/dynamic_rule): Built-in rules like `@{and}`, `@{or}`, `@{in}`, automatically determining whether conditions take effect based on parameter null values.
+    - [Argument Processing Rules](https://www.hasor.net/en/dbvisitor/docs/guides/rules/dynamic_rule#md5): Supports directives like `@{md5}`, `@{uuid}`, preprocessing arguments before SQL execution.
 - **Argument Processing**:
-    - Supports [Positional Arguments](https://www.dbvisitor.net/docs/guides/args/position): Use "?" in statements to mark parameters, binding values to the corresponding index (starting from 0).
-    - Supports [Named Arguments](https://www.dbvisitor.net/docs/guides/args/named): Use syntaxes like :name, &name, or #{...} in statements to name parameters in SQL.
-    - Supports [SQL Injection](https://www.dbvisitor.net/docs/guides/args/inject): Use ${...} syntax to retrieve values of named parameters and inject the result into the SQL statement.
-    - Supports [Rule Arguments](https://www.dbvisitor.net/docs/guides/args/rule): Use @{...} syntax to leverage the Rule mechanism to gracefully handle common dynamic SQL scenarios.
-    - Supports [Interface Mode](https://www.dbvisitor.net/docs/guides/args/interface): Customize parameter setting via interface implementation to meet special scenarios.
+    - Supports [Positional Arguments](https://www.hasor.net/en/dbvisitor/docs/guides/args/position): Use "?" in statements to mark parameters, binding values to the corresponding index (starting from 0).
+    - Supports [Named Arguments](https://www.hasor.net/en/dbvisitor/docs/guides/args/named): Use syntaxes like :name, &name, or #{...} in statements to name parameters in SQL.
+    - Supports [SQL Injection](https://www.hasor.net/en/dbvisitor/docs/guides/args/inject): Use ${...} syntax to retrieve values of named parameters and inject the result into the SQL statement.
+    - Supports [Rule Arguments](https://www.hasor.net/en/dbvisitor/docs/guides/args/rule): Use @{...} syntax to leverage the Rule mechanism to gracefully handle common dynamic SQL scenarios.
+    - Supports [Interface Mode](https://www.hasor.net/en/dbvisitor/docs/guides/args/interface): Customize parameter setting via interface implementation to meet special scenarios.
 - **TypeHandler**:
   - Flexible type conversion system automatically handling complex mappings.
-  - Rich type support covering [Basic Types](https://www.dbvisitor.net/docs/guides/types/handlers/about),
-    [JSON](https://www.dbvisitor.net/docs/guides/types/json-serialization),
-    [Enum](https://www.dbvisitor.net/docs/guides/types/enum-handler),
-    [Array](https://www.dbvisitor.net/docs/guides/types/array-handler),
-    [DateTime](https://www.dbvisitor.net/docs/guides/types/handlers/datetime-handler),
-    [GIS](https://www.dbvisitor.net/docs/guides/types/gis-handler),
-    [Stream](https://www.dbvisitor.net/docs/guides/types/stream-handler),
-    [Bytes](https://www.dbvisitor.net/docs/guides/types/handlers/bytes-handler), etc.
+  - Rich type support covering [Basic Types](https://www.hasor.net/en/dbvisitor/docs/guides/types/handlers/about),
+    [JSON](https://www.hasor.net/en/dbvisitor/docs/guides/types/json-serialization),
+    [Enum](https://www.hasor.net/en/dbvisitor/docs/guides/types/enum-handler),
+    [Array](https://www.hasor.net/en/dbvisitor/docs/guides/types/array-handler),
+    [DateTime](https://www.hasor.net/en/dbvisitor/docs/guides/types/handlers/datetime-handler),
+    [GIS](https://www.hasor.net/en/dbvisitor/docs/guides/types/gis-handler),
+    [Stream](https://www.hasor.net/en/dbvisitor/docs/guides/types/stream-handler),
+    [Bytes](https://www.hasor.net/en/dbvisitor/docs/guides/types/handlers/bytes-handler), etc.
 - **Receive Results**:
     - Provides multiple ways to process query results on all types of data sources.
-    - Common result processing includes [Bean Mapping](https://www.dbvisitor.net/docs/guides/core/mapping/about),
-      [RowMapper](https://www.dbvisitor.net/docs/guides/result/for_mapper),
-      [RowCallbackHandler](https://www.dbvisitor.net/docs/guides/result/row_callback),
-      [ResultSetExtractor](https://www.dbvisitor.net/docs/guides/result/for_extractor).
+    - Common result processing includes [Bean Mapping](https://www.hasor.net/en/dbvisitor/docs/guides/core/mapping/about),
+      [RowMapper](https://www.hasor.net/en/dbvisitor/docs/guides/result/for_mapper),
+      [RowCallbackHandler](https://www.hasor.net/en/dbvisitor/docs/guides/result/row_callback),
+      [ResultSetExtractor](https://www.hasor.net/en/dbvisitor/docs/guides/result/for_extractor).
 - **Session/Transaction**:
   - Supports multi-datasource transaction management (non-distributed transactions).
-  - Supports transaction control capabilities identical to Spring, including [7 Transaction Propagation Behaviors](https://www.dbvisitor.net/docs/guides/transaction/propagation).
-  - Control transactions via [Programmatic](https://www.dbvisitor.net/docs/guides/transaction/program),
-    [Annotation](https://www.dbvisitor.net/docs/guides/transaction/annotation),
-    and [Template Method](https://www.dbvisitor.net/docs/guides/transaction/template) approaches.
+  - Supports transaction control capabilities identical to Spring, including [7 Transaction Propagation Behaviors](https://www.hasor.net/en/dbvisitor/docs/guides/transaction/propagation).
+  - Control transactions via [Programmatic](https://www.hasor.net/en/dbvisitor/docs/guides/transaction/program),
+    [Annotation](https://www.hasor.net/en/dbvisitor/docs/guides/transaction/annotation),
+    and [Template Method](https://www.hasor.net/en/dbvisitor/docs/guides/transaction/template) approaches.
   - Tips: Although dbVisitor unifies transaction call forms, it cannot change the physical characteristics of the underlying database.
 - **Advanced Features**:
   - Strong affinity for Map structures, supporting multiple result set formats:
@@ -122,9 +122,9 @@ dbVisitor provides multi-level API abstraction, allowing for free switching betw
 - **Driver Adapter**:
   - Can transform into an independent JDBC Driver, allowing MyBatis/Hibernate to also operate on NoSQL.
   - Supports connecting to various databases via standard JDBC URLs.
-  - Adapted and supports [Redis](https://www.dbvisitor.net/docs/guides/drivers/redis/about),
-    [MongoDB](https://www.dbvisitor.net/docs/guides/drivers/mongo/about),
-    [ElasticSearch](https://www.dbvisitor.net/docs/guides/drivers/elastic/about), etc.
+  - Adapted and supports [Redis](https://www.hasor.net/en/dbvisitor/docs/drivers/redis/about),
+    [MongoDB](https://www.hasor.net/en/dbvisitor/docs/drivers/mongo/about),
+    [ElasticSearch](https://www.hasor.net/en/dbvisitor/docs/drivers/elastic/about), etc.
 
 ## 💡 Why dbVisitor?
 
@@ -234,9 +234,9 @@ T resultList = jdbcTemplate.execute((ConnectionCallback<T>) con -> {
 
 ## 📚 Resources
 
-- **Website**: [https://www.dbvisitor.net](https://www.dbvisitor.net)
-- **Documentation**: [https://www.dbvisitor.net/docs/guides](https://www.dbvisitor.net/docs/guides)
-- **Blog**: [https://www.dbvisitor.net/blog](https://www.dbvisitor.net/blog)
+- **Website**: [https://www.hasor.net/dbvisitor/](https://www.hasor.net/dbvisitor/)
+- **Documentation**: [https://www.hasor.net/en/dbvisitor/docs/guides/overview](https://www.hasor.net/en/dbvisitor/docs/guides/overview)
+- **Blog**: [https://www.hasor.net/en/blog/dbvisitor/](https://www.hasor.net/en/blog/dbvisitor/)
 
 ## 📄 License
 

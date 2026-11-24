@@ -4,5 +4,5 @@
 
 Access Elasticsearch through JDBC and REST-style commands. Full documentation is maintained in `dbvisitor-doc`.
 
-- [中文文档](../../dbvisitor-doc/docs/drivers/elastic/about.md)
-- [English documentation](../../dbvisitor-doc/i18n/en/docusaurus-plugin-content-docs/current/drivers/elastic/about.md)
+- [中文文档](https://www.hasor.net/cn/dbvisitor/docs/drivers/elastic/about)
+- [English documentation](https://www.hasor.net/en/dbvisitor/docs/drivers/elastic/about)

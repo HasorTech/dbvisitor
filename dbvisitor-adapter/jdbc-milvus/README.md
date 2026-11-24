@@ -4,5 +4,5 @@
 
 Access Milvus through JDBC and SQL-style commands, with one service address per connection. Full documentation is maintained in `dbvisitor-doc`.
 
-- [中文文档](../../dbvisitor-doc/docs/drivers/milvus/about.md)
-- [English documentation](../../dbvisitor-doc/i18n/en/docusaurus-plugin-content-docs/current/drivers/milvus/about.md)
+- [中文文档](https://www.hasor.net/cn/dbvisitor/docs/drivers/milvus/about)
+- [English documentation](https://www.hasor.net/en/dbvisitor/docs/drivers/milvus/about)
