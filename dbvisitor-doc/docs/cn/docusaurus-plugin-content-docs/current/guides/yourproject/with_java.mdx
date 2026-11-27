@@ -5,7 +5,7 @@ hide_table_of_contents: true
 title: 3.2 普通项目
 description: 如何在一个普通项目上使用 dbVisitor。
 ---
-import Vars from '@site/plugins/projectVars';
+import {projectVars as Vars} from '@site/plugins/projectVars';
 
 export const Highlight = ({children, color}) => (
   <span style={{ backgroundColor: color, borderRadius: '2px', color: '#fff', padding: '0.2rem', }}>{children}</span>
@@ -23,13 +23,13 @@ dbvisitor 也可以很好的和任何 Java 项目整合使用，包括 Spring Bo
 
 依赖配置见[引入依赖](./buildtools)。
 
-依赖包，当前指南版本：<Highlight color="rgb(227 17 108)">{Vars.docsVersion}</Highlight>
+依赖包，最新正式版：<Highlight color="rgb(227 17 108)">{Vars.lastReleaseVer}</Highlight>
 
 ```xml title='Maven 依赖'
 <dependency>
   <groupId>net.hasor</groupId>
   <artifactId>dbvisitor</artifactId>
-  <version>@project.docsVersion@</version>
+  <version>@project.lastReleaseVer@</version>
 </dependency>
 ```
 

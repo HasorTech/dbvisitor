@@ -1,6 +1,7 @@
 {
   "name": "dbvisitor-doc",
-  "version": "5.2.2",
+  "version": "6.8.2",
+  "lastReleaseTime": "2026-10-05",
   "private": true,
   "scripts": {
     "docusaurus": "docusaurus",

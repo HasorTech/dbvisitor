@@ -5,7 +5,7 @@ hide_table_of_contents: true
 title: 1. 介绍
 description: dbVisitor 的 One Access 理念与双层适配器架构，以统一 API 或一致编程风格访问关系型、文档、键值、搜索和向量数据源。
 ---
-import Vars from '@site/plugins/projectVars';
+import {projectVars as Vars} from '@site/plugins/projectVars';
 
 <span id="介绍" />
 
@@ -114,7 +114,6 @@ dbVisitor 的核心突破在于访问模式的无缝集成：开发者可以在�
 ## 版本事件
 
 - 最新正式版：v{Vars.lastReleaseVer}
-- 当前使用指南对应：{Vars.docsVersion}。
 - `6.x` 版本 是一次全新的升级，在继承了 5.x 的功能，并针对不同风格 API 的实现做了较大改进使其在各个方面的用法和行为保持统一。
 - `5.x` 版本 dbVisitor 正式从 Hasor 框架中分离出来并提供 编程式 API、声明式 API、构造器 三种不同风格的 API 来访问数据库。
 - `4.x` 及以前版本中没有自己独立的版本，其发布跟随 [Hasor](https://www.hasor.net/) 框架发布。

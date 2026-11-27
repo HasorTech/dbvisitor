@@ -28,7 +28,7 @@ title: 引入依赖
 <dependency>
     <groupId>net.hasor</groupId>
     <artifactId>jdbc-redis</artifactId>
-    <version>@project.jdbcDriverVersion@</version>
+    <version>@project.lastReleaseVer@</version>
 </dependency>
 ```
 
@@ -40,7 +40,7 @@ repositories {
 }
 
 dependencies {
-    implementation "net.hasor:jdbc-redis:@project.jdbcDriverVersion@"
+    implementation "net.hasor:jdbc-redis:@project.lastReleaseVer@"
 }
 ```
 
@@ -58,7 +58,7 @@ dependencies {
 <dependency>
     <groupId>net.hasor</groupId>
     <artifactId>jdbc-redis</artifactId>
-    <version>@project.jdbcDriverVersion@</version>
+    <version>@project.lastReleaseVer@</version>
     <!-- 选择包含运行依赖的单包 -->
     <classifier>alone</classifier>
     <!-- 运行依赖已包含在包中，不再引入重复的 JAR -->
@@ -81,7 +81,7 @@ repositories {
 }
 
 dependencies {
-    implementation("net.hasor:jdbc-redis:@project.jdbcDriverVersion@:alone") {
+    implementation("net.hasor:jdbc-redis:@project.lastReleaseVer@:alone") {
         // 运行依赖已包含在 alone 包中
         transitive = false
     }

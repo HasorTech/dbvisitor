@@ -5,7 +5,7 @@ hide_table_of_contents: true
 title: 3.2 Plain Java Projects
 description: How to use dbVisitor in a plain Java project.
 ---
-import Vars from '@site/plugins/projectVars';
+import {projectVars as Vars} from '@site/plugins/projectVars';
 
 export const Highlight = ({children, color}) => (
   <span style={{ backgroundColor: color, borderRadius: '2px', color: '#fff', padding: '0.2rem', }}>{children}</span>
@@ -23,13 +23,13 @@ dbVisitor integrates well with any Java project, including Spring Boot and Quark
 
 See [Add Dependency](./buildtools) for dependency configuration.
 
-the dependency, guide version: <Highlight color="rgb(227 17 108)">{Vars.docsVersion}</Highlight>
+the dependency, latest stable version: <Highlight color="rgb(227 17 108)">{Vars.lastReleaseVer}</Highlight>
 
 ```xml title='Maven dependencies'
 <dependency>
   <groupId>net.hasor</groupId>
   <artifactId>dbvisitor</artifactId>
-  <version>@project.docsVersion@</version>
+  <version>@project.lastReleaseVer@</version>
 </dependency>
 ```
 

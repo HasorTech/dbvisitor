@@ -33,7 +33,7 @@ npm run build
 
 入口介绍复用中英文概览正文。`docusaurus.config.js` 中的 `overview` 指定每种语言文档目录下的 `guides/overview.mdx`；插件读取对应语言文件中 `{/* llms:start */}` 与 `{/* llms:end */}` 之间的普通 Markdown。维护项目定位、架构与起步流程时修改这段正文即可，文档页面和 AI 入口会一起更新。
 
-摘要中的链接使用实际发布地址，可写成相对于概览的路径；插件会移除 `.md`、`.mdx` 扩展名并补齐站点地址与语言前缀。文档版本来自 `plugins/projectVars.js`，使用前应核对项目依赖版本。
+摘要中的链接使用实际发布地址，可写成相对于概览的路径；插件会移除 `.md`、`.mdx` 扩展名并补齐站点地址与语言前缀。当前正式版本来自 `package.json`，使用前应核对项目依赖版本。
 
 可以向编程助手提供以下指引：
 
@@ -52,15 +52,15 @@ npm run serve -- --host 127.0.0.1 --port 3000
 
 ## 文档版本变量
 
-`plugins/projectVars.js` 统一维护版本：`docsVersion` 用于使用指南及通用依赖示例，`jdbcDriverVersion` 用于四个非关系型 JDBC 驱动的依赖示例和 `alone` 下载链接，`developmentVersion` 用于开发版本入口，`lastReleaseVer`、`lastReleaseTime` 用于最新发布信息。首页也从此文件读取版本。
+`package.json` 的 `version` 提供当前正式版本。指南、依赖示例和 JDBC 单包下载链接都通过 `lastReleaseVer` 引用它。发布日期由 `package.json` 的 `lastReleaseTime` 提供。
 
-Markdown/MDX 正文、行内代码、代码块和链接可使用 `@project.docsVersion@`、`@project.jdbcDriverVersion@`、`@project.lastReleaseVer@`、`@project.lastReleaseTime@`。构建后显示和复制的内容均为实际值；变量名拼错会使构建失败。
+Markdown/MDX 正文、行内代码、代码块和链接可使用 `@project.lastReleaseVer@`、`@project.lastReleaseTime@`。构建后显示和复制的内容均为实际值；变量名拼错会使构建失败。
 
 ```xml
-<version>@project.docsVersion@</version>
+<version>@project.lastReleaseVer@</version>
 ```
 
-修改后重新构建，本地预览需重启。历史版本、兼容性最低版本及第三方依赖版本保持固定，不随当前版本变化。此配置不修改 Java 工程或文档站 package.json 的版本。
+修改后重新构建，本地预览需重启。历史版本、兼容性最低版本及第三方依赖版本保持固定，不随当前版本变化。此配置不修改 Java 工程的版本。
 
 ## 部署到 OSS 并刷新 CDN
 

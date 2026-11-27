@@ -7,7 +7,7 @@ description: Integration of dbVisitor ORM tool and Guice.
 ---
 import TagRed from '@site/src/components/tags/TagRed';
 import TagGray from '@site/src/components/tags/TagGray';
-import Vars from '@site/plugins/projectVars';
+import {projectVars as Vars} from '@site/plugins/projectVars';
 
 export const Highlight = ({children, color}) => (
   <span style={{ backgroundColor: color, borderRadius: '2px', color: '#fff', padding: '0.2rem', }}>{children}</span>
@@ -30,13 +30,13 @@ Guice is Google's lightweight dependency injection framework, suitable for proje
 
 ## How to Use
 
-First, add the dependency, guide version: <Highlight color="rgb(227 17 108)">{Vars.docsVersion}</Highlight>
+First, add the dependency, latest stable version: <Highlight color="rgb(227 17 108)">{Vars.lastReleaseVer}</Highlight>
 
 ```xml title='Maven Dependency'
 <dependency>
   <groupId>net.hasor</groupId>
   <artifactId>dbvisitor-guice</artifactId>
-  <version>@project.docsVersion@</version>
+  <version>@project.lastReleaseVer@</version>
 </dependency>
 ```
 

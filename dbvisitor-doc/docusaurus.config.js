@@ -5,8 +5,7 @@ const {themes} = require('prism-react-renderer');
 const lightCodeTheme = themes.github;
 const darkCodeTheme = themes.dracula;
 const {onlineOrigins} = require('./hasor-tech/routes');
-const projectVars = require('./plugins/projectVars.js');
-const remarkProjectVars = require('./plugins/remark-project-vars.js');
+const {projectVars, replaceVariables} = require('./plugins/projectVars.js');
 
 /** @type {import('@docusaurus/types').Config} */
 const config = require('./hasor-tech/config')({
@@ -16,10 +15,10 @@ const config = require('./hasor-tech/config')({
     baseUrl: process.env.DOCS_BASE_URL || '/',
     onBrokenLinks: 'throw',
     markdown: {
-        preprocessor: ({fileContent}) => remarkProjectVars.replaceVariables(fileContent, projectVars),
+        preprocessor: ({fileContent}) => replaceVariables(fileContent),
         parseFrontMatter: ({filePath, fileContent, defaultParseFrontMatter}) => defaultParseFrontMatter({
             filePath,
-            fileContent: remarkProjectVars.replaceVariables(fileContent, projectVars),
+            fileContent: replaceVariables(fileContent),
         }),
     },
     favicon: 'img/favicon/crab.ico',
@@ -36,7 +35,6 @@ const config = require('./hasor-tech/config')({
             {
                 docs: {
                     path: 'docs/cn/docusaurus-plugin-content-docs/current',
-                    remarkPlugins: [[remarkProjectVars, projectVars]],
                     sidebarPath: require.resolve('./sidebars.js'),
                     async sidebarItemsGenerator({defaultSidebarItemsGenerator, ...args}) {
                         const items = await defaultSidebarItemsGenerator(args);
@@ -86,8 +84,8 @@ const config = require('./hasor-tech/config')({
                 siteTitle: 'dbVisitor',
                 overview: 'guides/overview.mdx',
                 descriptions: {
-                    'zh-cn': `dbVisitor ${projectVars.docsVersion} 文档：Java 数据库 API、数据源特性、JDBC 驱动和实战教程。开发版本在版本说明中单独标注。`,
-                    en: `dbVisitor ${projectVars.docsVersion} documentation: Java database APIs, data source capabilities, JDBC drivers, and tutorials. Development releases are marked separately.`,
+                    'zh-cn': `dbVisitor ${projectVars.lastReleaseVer} 文档：Java 数据库 API、数据源特性、JDBC 驱动和实战教程。`,
+                    en: `dbVisitor ${projectVars.lastReleaseVer} documentation: Java database APIs, data source capabilities, JDBC drivers, and tutorials.`,
                 },
                 depth: 2,
                 onRouteError: 'throw',

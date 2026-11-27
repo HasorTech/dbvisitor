@@ -5,7 +5,7 @@ hide_table_of_contents: true
 title: 3.1 Add Dependency
 description: Introduce dbVisitor in your familiar build tools.
 ---
-import Vars from '@site/plugins/projectVars';
+import {projectVars as Vars} from '@site/plugins/projectVars';
 
 export const Highlight = ({children, color}) => (
   <span style={{ backgroundColor: color, borderRadius: '2px', color: '#fff', padding: '0.2rem', }}>{children}</span>
@@ -18,7 +18,6 @@ Therefore, any project using dependency management tools (Apache Maven, Gradle, 
 
 The latest stable dbVisitor release is: **<Highlight color="rgb(227 17 108)">{Vars.lastReleaseVer}</Highlight>**
 
-This guide targets **{Vars.docsVersion}**.
 
 ## Choose an Integration
 
@@ -38,7 +37,7 @@ Introduce dbVisitor in a project using Apache Maven
 <dependency>
     <groupId>net.hasor</groupId>
     <artifactId>dbvisitor</artifactId>
-    <version>@project.docsVersion@</version>
+    <version>@project.lastReleaseVer@</version>
 </dependency>
 ```
 
@@ -48,7 +47,7 @@ Introduce dbVisitor in a project using Gradle
 
 ```text
 // Gradle
-implementation 'net.hasor:dbvisitor:@project.docsVersion@'
+implementation 'net.hasor:dbvisitor:@project.lastReleaseVer@'
 ```
 
 ## Mixing Different Versions of dbVisitor

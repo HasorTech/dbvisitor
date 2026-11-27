@@ -28,7 +28,7 @@ For Maven/Gradle application development, use either configuration below. No cla
 <dependency>
     <groupId>net.hasor</groupId>
     <artifactId>jdbc-elastic</artifactId>
-    <version>@project.jdbcDriverVersion@</version>
+    <version>@project.lastReleaseVer@</version>
 </dependency>
 ```
 
@@ -40,7 +40,7 @@ repositories {
 }
 
 dependencies {
-    implementation "net.hasor:jdbc-elastic:@project.jdbcDriverVersion@"
+    implementation "net.hasor:jdbc-elastic:@project.lastReleaseVer@"
 }
 ```
 
@@ -58,7 +58,7 @@ Copy the complete dependency below into `pom.xml`. The `classifier` selects the 
 <dependency>
     <groupId>net.hasor</groupId>
     <artifactId>jdbc-elastic</artifactId>
-    <version>@project.jdbcDriverVersion@</version>
+    <version>@project.lastReleaseVer@</version>
     <!-- Select the self-contained JAR -->
     <classifier>alone</classifier>
     <!-- Dependencies are already bundled; do not fetch duplicate JARs -->
@@ -81,7 +81,7 @@ repositories {
 }
 
 dependencies {
-    implementation("net.hasor:jdbc-elastic:@project.jdbcDriverVersion@:alone") {
+    implementation("net.hasor:jdbc-elastic:@project.lastReleaseVer@:alone") {
         // Dependencies are already bundled in the alone JAR
         transitive = false
     }

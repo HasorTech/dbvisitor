@@ -9,7 +9,7 @@ import TagRed from '@site/src/components/tags/TagRed';
 import TagGray from '@site/src/components/tags/TagGray';
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
-import Vars from '@site/plugins/projectVars';
+import {projectVars as Vars} from '@site/plugins/projectVars';
 
 export const Highlight = ({children, color}) => (
 <span style={{ backgroundColor: color, borderRadius: '2px', color: '#fff', padding: '0.2rem', }}>{children}</span>
@@ -35,7 +35,7 @@ Spring is a widely used Java application framework that provides an IoC containe
 
 ## Configuration Method
 
-First, add the dependency, guide version: <Highlight color="rgb(227 17 108)">{Vars.docsVersion}</Highlight>
+First, add the dependency, latest stable version: <Highlight color="rgb(227 17 108)">{Vars.lastReleaseVer}</Highlight>
 
 <Tabs>
   <TabItem value="a" label="SpringBoot Project" default>
@@ -44,7 +44,7 @@ First, add the dependency, guide version: <Highlight color="rgb(227 17 108)">{Va
   <dependency>
       <groupId>net.hasor</groupId>
       <artifactId>dbvisitor-spring-starter</artifactId>
-      <version>@project.docsVersion@</version>
+      <version>@project.lastReleaseVer@</version>
   </dependency>
   ```
 
@@ -55,7 +55,7 @@ First, add the dependency, guide version: <Highlight color="rgb(227 17 108)">{Va
   <dependency>
       <groupId>net.hasor</groupId>
       <artifactId>dbvisitor-spring</artifactId>
-      <version>@project.docsVersion@</version>
+      <version>@project.lastReleaseVer@</version>
   </dependency>
   ```
 

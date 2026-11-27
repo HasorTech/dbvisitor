@@ -9,7 +9,7 @@ import TagRed from '@site/src/components/tags/TagRed';
 import TagGray from '@site/src/components/tags/TagGray';
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
-import Vars from '@site/plugins/projectVars';
+import {projectVars as Vars} from '@site/plugins/projectVars';
 
 export const Highlight = ({children, color}) => (
 <span style={{ backgroundColor: color, borderRadius: '2px', color: '#fff', padding: '0.2rem', }}>{children}</span>
@@ -35,7 +35,7 @@ Spring 是一个广泛使用的 Java 应用框架，提供 IoC 容器、事务�
 
 ## 配置方法
 
-首先引入依赖包，当前指南版本：<Highlight color="rgb(227 17 108)">{Vars.docsVersion}</Highlight>
+首先引入依赖包，最新正式版：<Highlight color="rgb(227 17 108)">{Vars.lastReleaseVer}</Highlight>
 
 <Tabs>
   <TabItem value="a" label="SpringBoot 项目" default>
@@ -44,7 +44,7 @@ Spring 是一个广泛使用的 Java 应用框架，提供 IoC 容器、事务�
   <dependency>
       <groupId>net.hasor</groupId>
       <artifactId>dbvisitor-spring-starter</artifactId>
-      <version>@project.docsVersion@</version>
+      <version>@project.lastReleaseVer@</version>
   </dependency>
   ```
 
@@ -55,7 +55,7 @@ Spring 是一个广泛使用的 Java 应用框架，提供 IoC 容器、事务�
   <dependency>
       <groupId>net.hasor</groupId>
       <artifactId>dbvisitor-spring</artifactId>
-      <version>@project.docsVersion@</version>
+      <version>@project.lastReleaseVer@</version>
   </dependency>
   ```
 

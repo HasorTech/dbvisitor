@@ -5,7 +5,7 @@ hide_table_of_contents: true
 title: 1. Introduction
 description: dbVisitor's One Access vision and two-layer adapter architecture bring a shared API or consistent programming style to relational, document, key-value, search and vector data sources.
 ---
-import Vars from '@site/plugins/projectVars';
+import {projectVars as Vars} from '@site/plugins/projectVars';
 
 <span id="introduction" />
 
@@ -115,7 +115,6 @@ In terms of API design, dbVisitor provides APIs with a style similar to Spring J
 ## Version Events
 
 - Latest release: v{Vars.lastReleaseVer}
-- This guide describes {Vars.docsVersion}.
 - `6.x` version is a brand new upgrade. While inheriting the functions of 5.x, it has made major improvements to the implementation of different style APIs to keep usage and behavior unified in all aspects.
 - `5.x` version: dbVisitor was officially separated from the Hasor framework and provides three different styles of APIs — Programmatic API, Declarative API, and Builder API — to access the database.
 - `4.x` and earlier versions did not have their own independent versions, and their release followed the [Hasor](https://www.hasor.net/) framework release.

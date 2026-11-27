@@ -7,7 +7,7 @@ description: dbVisitor ORM 工具和 Solon 整合使用。
 ---
 import TagRed from '@site/src/components/tags/TagRed';
 import TagGray from '@site/src/components/tags/TagGray';
-import Vars from '@site/plugins/projectVars';
+import {projectVars as Vars} from '@site/plugins/projectVars';
 
 export const Highlight = ({children, color}) => (
   <span style={{ backgroundColor: color, borderRadius: '2px', color: '#fff', padding: '0.2rem', }}>{children}</span>
@@ -30,13 +30,13 @@ Solon 是一个轻量级 Java 应用框架，提供依赖注入、配置、Web�
 
 ## 配置方法
 
-首先引入依赖包，当前指南版本：<Highlight color="rgb(227 17 108)">{Vars.docsVersion}</Highlight>
+首先引入依赖包，最新正式版：<Highlight color="rgb(227 17 108)">{Vars.lastReleaseVer}</Highlight>
 
 ```xml title='Maven 依赖'
 <dependency>
     <groupId>net.hasor</groupId>
     <artifactId>dbvisitor-solon-plugin</artifactId>
-    <version>@project.docsVersion@</version>
+    <version>@project.lastReleaseVer@</version>
 </dependency>
 ```
 

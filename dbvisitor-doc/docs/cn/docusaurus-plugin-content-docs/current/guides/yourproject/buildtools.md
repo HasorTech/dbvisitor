@@ -5,7 +5,7 @@ hide_table_of_contents: true
 title: 3.1 引入依赖
 description: 在熟悉的构建工具中引入 dbVisitor。
 ---
-import Vars from '@site/plugins/projectVars';
+import {projectVars as Vars} from '@site/plugins/projectVars';
 
 export const Highlight = ({children, color}) => (
   <span style={{ backgroundColor: color, borderRadius: '2px', color: '#fff', padding: '0.2rem', }}>{children}</span>
@@ -18,7 +18,6 @@ dbVisitor 正式发布的模块可以通过 [Maven Central](https://central.sona
 
 dbVisitor 最新正式版本为：**<Highlight color="rgb(227 17 108)">{Vars.lastReleaseVer}</Highlight>**
 
-当前使用指南对应 **{Vars.docsVersion}**。
 
 ## 选择接入方式
 
@@ -38,7 +37,7 @@ dbVisitor 最新正式版本为：**<Highlight color="rgb(227 17 108)">{Vars.las
 <dependency>
     <groupId>net.hasor</groupId>
     <artifactId>dbvisitor</artifactId>
-    <version>@project.docsVersion@</version>
+    <version>@project.lastReleaseVer@</version>
 </dependency>
 ```
 
@@ -48,7 +47,7 @@ dbVisitor 最新正式版本为：**<Highlight color="rgb(227 17 108)">{Vars.las
 
 ```text
 // Gradle
-implementation 'net.hasor:dbvisitor:@project.docsVersion@'
+implementation 'net.hasor:dbvisitor:@project.lastReleaseVer@'
 ```
 
 ## 混合 dbVisitor 不同版本
