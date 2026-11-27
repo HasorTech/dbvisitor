@@ -88,6 +88,7 @@ const config = require('./hasor-tech/config')({
                     en: `dbVisitor ${projectVars.lastReleaseVer} documentation: Java database APIs, data source capabilities, JDBC drivers, and tutorials.`,
                 },
                 depth: 2,
+                logLevel: 0, // Route exclusions below are expected.
                 onRouteError: 'throw',
                 content: {
                     enableMarkdownFiles: false,
